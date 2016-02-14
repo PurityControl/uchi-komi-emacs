@@ -24,7 +24,7 @@ The function can either be called programatically or interactively.
 * Retrospective
 Simple first implmentation more about process of setting up emacs and testing.
 
-*Process Followed
+* Process Followed
 - setup testing using ert
   - more information on ert at http://www.gnu.org/software/emacs/manual/html_mono/ert.html
 - make function pass tests 
@@ -40,7 +40,7 @@ from a user and uses them as arguments to the function.
 Arguments can be prompted in the mini buffer if required. This means a
 function can be called both interactively and not interactively.
 
-*TODO
+* TODO
 bind keys to call function as needed.
 
 
