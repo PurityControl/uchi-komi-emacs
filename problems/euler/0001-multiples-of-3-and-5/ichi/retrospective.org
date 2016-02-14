@@ -40,7 +40,7 @@ from a user and uses them as arguments to the function.
 Arguments can be prompted in the mini buffer if required. This means a
 function can be called both interactively and not interactively.
 
-* TODO
+* TO-DO
 bind keys to call function as needed.
 
 
