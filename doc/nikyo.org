@@ -1,1 +1,75 @@
 #+TITLE: Dai-nikyo (Group 2) - Testing
+
+* ERT Testing framework
+
+Emacs' unit testing framework is ERT and comes bundles with emacs.
+Documentation for the ERT testing framework can be seen online
+[[http://www.gnu.org/software/emacs/manual/html_mono/ert.html][here]].
+You can find the same documentation in emacs info mode
+~<C-h> i m ert <return>~
+
+** Loading library under test
+Obviously to test emacs the library under test needs to be loaded into emacs.
+If running tests interactively within emacs you will need to make sure
+the latest functions have been evaluated in emacs. The quickest way of doing
+this is probably with ~<M-x> eval-buffer~.
+
+If you are running tests by launching the tests from the command file, you
+will need to make sure that your tests are loading the library under test.
+This can be Done with something like
+
+~(load-file "my-library.el")~
+
+** Defining a test
+
+An ERT test is defined using ~ert-deftest~. It takes the same form as a
+function definition so should feel quite familiar. Just as with a function
+definition it takes an optional documentation string.
+
+#+BEGIN_SRC elisp
+(ert-deftest my-new-test ()
+  "Tests the rendering of `quote' symbols in `pp-to-string'."
+  (should (equal 2 2)))
+#+END_SRC
+
+*** Should
+Each test will then comprise of should macros to validate the library under
+test.
+Valid assertion macros are ~should~, ~should-not~ and ~should-error~.
+
+** Running tests
+Tests can be run interactively or from the command line.
+
+*** Interactively
+As discussed above the library under test must be loaded into the lisp
+environment before it can be tested. Once this is done then you can run
+tests with:
+
+~<M-x> ert <return> t <return>~
+
+The ~t~ option runs all of the tests. There are other options which
+can be found at the website link above or from info mode ~C-h i m ert RET~.
+
+*** From the command line
+To run your tests in batch mode from the command line execute the following
+command in the shell replacing the ~my-tests.el~ section with the name of your
+test file.
+
+~emacs -batch -l ert -l my-tests.el -f ert-run-tests-batch-and-exit~
+
+** Example
+The sample code below shows the typical format of a test file, from loading
+the file under test to defining the tests.
+
+#+BEGIN_SRC elip
+;; load the file under test
+(load-file "multiples.el")
+
+;; write your tests
+(ert-deftest multiples-to-10 ()
+  "mutlipes of 3 and 5 to 10: 3, 5, 6, 9 total 23"
+  (should (= 23 (multiples_to 10))))
+
+;; provide the file so it can be required
+(provide 'multiples-test)
+#+END_SRC
