@@ -5,7 +5,7 @@
 Emacs' unit testing framework is ERT and comes bundles with emacs.
 Documentation for the ERT testing framework can be seen online
 [[http://www.gnu.org/software/emacs/manual/html_mono/ert.html][here]].
-You can find the same documentation in emacs infor mode
+You can find the same documentation in emacs info mode
 ~<C-h> i m ert <return>~
 
 ** Loading library under test
@@ -57,3 +57,19 @@ test file.
 
 ~emacs -batch -l ert -l my-tests.el -f ert-run-tests-batch-and-exit~
 
+** Example
+The sample code below shows the typical format of a test file, from loading
+the file under test to defining the tests.
+
+#+BEGIN_SRC elip
+;; load the file under test
+(load-file "multiples.el")
+
+;; write your tests
+(ert-deftest multiples-to-10 ()
+  "mutlipes of 3 and 5 to 10: 3, 5, 6, 9 total 23"
+  (should (= 23 (multiples_to 10))))
+
+;; provide the file so it can be required
+(provide 'multiples-test)
+#+END_SRC
