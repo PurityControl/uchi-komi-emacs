@@ -1,0 +1,49 @@
+#+TITLE: Retrospective for multiples of 3 and 5.
+
+* Running the project
+** Tests
+To run tests from the command line
+~emacs -batch -l ert -l even-fibs-tests.el -f ert-run-tests-batch-and-exit~
+or while in buffer
+~<M-x> eval-buffer~
+~<M-x> ert <enter> t <enter>~
+
+** Code
+
+*** Loading the code
+The code will need to be loaded either through loading the file or
+evaluating the buffer.
+The function can either be called programatically or interactively.
+
+**** Programatically
+~(sum-even-fibs-to 1000)~
+
+**** Interactively
+~<M-x>sum-even-fibs-to <enter> 1000 <enter>~
+
+* Retrospective
+labels macro is now ~cl-labels~ as of emacs 24.3.
+Use labels to create a nested function that accumulates the sum and returns
+the answer. Answer bound to a let so the function is only called once but
+referenced in messages and the return value.
+
+* Process Followed
+- setup testing using ert
+  - more information on ert at http://www.gnu.org/software/emacs/manual/html_mono/ert.html
+- make function pass tests 
+- add interactive features
+  - sending information to the message buffer now required as a return value
+    displays no information to the end user.
+  - still need to return a value so non interactive tests pass and
+    traditional function calls continue to work.
+
+* Interactive
+The interactive function (<C-h> f interactive) allows you to take parameters
+from a user and uses them as arguments to the function.
+Arguments can be prompted in the mini buffer if required. This means a
+function can be called both interactively and not interactively.
+
+* TO-DO
+bind keys to call function as needed.
+
+
